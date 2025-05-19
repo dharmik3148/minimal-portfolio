@@ -1,0 +1,112 @@
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       Int         @id @default(autoincrement())
+  username String
+  password String
+  sessions UserSession[]
+}
+
+model UserSession {
+  id     Int    @id @default(autoincrement())
+  token  String
+  userId Int 
+  user   User   @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+  
+}
+
+model Project {
+  id        Int       @id @default(autoincrement())
+  title     String
+  details   String?
+  github    String?
+  livedemo  String?
+  tags      String?
+  images    Image[]
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @default(now()) @updatedAt
+
+}
+
+model Image {
+  id        Int       @id @default(autoincrement())
+  path      String
+  projectId Int
+  project   Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @default(now()) @updatedAt
+}
+
+model Experience {
+  id           Int       @id @default(autoincrement())
+  organization String
+  link         String
+  image        String
+  isWork       Boolean   @default(false)
+  position     String?
+  duration     String
+  location     String?
+  description  String 
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @default(now()) @updatedAt
+}
+
+model Homepage {
+  id           Int       @id @default(autoincrement())
+  hone         String?
+  htwo         String?
+  musicpath    String?
+  resumepath   String?
+  imagepath    String?
+  content      String?
+
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @default(now()) @updatedAt
+}
+
+model Skills {
+  id           Int       @id @default(autoincrement())
+  skillname    String
+  logopath     String
+  category     String
+
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @default(now()) @updatedAt
+}
+
+model Achievement {
+  id          Int      @id @default(autoincrement())
+  title       String
+  link        String
+  imagepath   String
+  date        DateTime
+  description String
+
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @default(now()) @updatedAt
+}
+
+model Contact {
+  id          Int      @id @default(autoincrement())
+  title       String
+  value       String
+  iconName    String
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @default(now()) @updatedAt
+}

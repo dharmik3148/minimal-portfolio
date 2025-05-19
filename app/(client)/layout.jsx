@@ -11,7 +11,9 @@ export default async function RootLayout({ children }) {
   const pathname = getCookie("next-url") || "";
   const isAdmin = pathname.startsWith("/admin");
 
-  const response = await axios.get(`/api/alldata`);
+  const response = await axios.get(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/alldata`
+  );
   const homepageData = response.data;
 
   return (

@@ -6,7 +6,6 @@ import HeroSection from "@/components/clientComponents/HeroSection";
 import Projects from "@/components/clientComponents/Projects";
 import TechStack from "@/components/clientComponents/TechStack";
 import ScrollVelocity from "@/components/effects/ScrollVelocity";
-import { getAllData } from "@/lib/getAllData";
 
 import React from "react";
 
@@ -18,7 +17,16 @@ export const metadata = {
 };
 
 const Home = async () => {
-  const data = await getAllData();
+  let data = null;
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/alldata`, {
+      cache: "no-store",
+    });
+    data = await res.json();
+  } catch (error) {
+    console.error("Error in getAllData:", error);
+    return {};
+  }
 
   return (
     <div className="pb-[50px]">

@@ -5,15 +5,22 @@ import SmoothScroll from "@/components/effects/SmoothScroll";
 import Navbar from "@/components/clientComponents/Navbar";
 
 import { getCookie } from "cookies-next";
-import { getAllData } from "@/lib/getAllData";
-
 export const dynamic = "force-dynamic";
 
 export default async function RootLayout({ children }) {
   const pathname = getCookie("next-url") || "";
   const isAdmin = pathname.startsWith("/admin");
 
-  const homepageData = await getAllData();
+  let homepageData = null;
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/alldata`, {
+      cache: "no-store",
+    });
+    homepageData = await res.json();
+  } catch (error) {
+    console.error("Error in getAllData:", error);
+    return {};
+  }
 
   return (
     <html lang="en">

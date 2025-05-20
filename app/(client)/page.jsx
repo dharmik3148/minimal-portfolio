@@ -16,7 +16,7 @@ export const metadata = {
 
 const Home = async () => {
   const response = await axios.get(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/alldata`
+    `${process.env.NEXT_PUBLIC_API_URL}/api/alldata`
   );
   const data = response.data;
 

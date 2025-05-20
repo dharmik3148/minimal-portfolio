@@ -12,7 +12,7 @@ export default async function RootLayout({ children }) {
   const isAdmin = pathname.startsWith("/admin");
 
   const response = await axios.get(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/alldata`
+    `${process.env.NEXT_PUBLIC_API_URL}/api/alldata`
   );
   const homepageData = response.data;
 

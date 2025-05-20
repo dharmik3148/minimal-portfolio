@@ -4,17 +4,16 @@ import CreepyGrid from "@/components/effects/CreepyGrid";
 import SmoothScroll from "@/components/effects/SmoothScroll";
 import Navbar from "@/components/clientComponents/Navbar";
 
-import axios from "axios";
 import { getCookie } from "cookies-next";
+import { getAllData } from "@/lib/getAllData";
+
+export const dynamic = "force-dynamic";
 
 export default async function RootLayout({ children }) {
   const pathname = getCookie("next-url") || "";
   const isAdmin = pathname.startsWith("/admin");
 
-  const response = await axios.get(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/alldata`
-  );
-  const homepageData = response.data;
+  const homepageData = await getAllData();
 
   return (
     <html lang="en">

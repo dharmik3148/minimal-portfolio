@@ -6,8 +6,11 @@ import HeroSection from "@/components/clientComponents/HeroSection";
 import Projects from "@/components/clientComponents/Projects";
 import TechStack from "@/components/clientComponents/TechStack";
 import ScrollVelocity from "@/components/effects/ScrollVelocity";
-import axios from "axios";
+import { getAllData } from "@/lib/getAllData";
+
 import React from "react";
+
+export const dynamic = "force-dynamic";
 
 export const metadata = {
   title: "Dharmik - Portfolio",
@@ -15,10 +18,7 @@ export const metadata = {
 };
 
 const Home = async () => {
-  const response = await axios.get(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/alldata`
-  );
-  const data = response.data;
+  const data = await getAllData();
 
   return (
     <div className="pb-[50px]">

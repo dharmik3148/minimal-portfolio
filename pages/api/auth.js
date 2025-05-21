@@ -26,6 +26,33 @@ export default async function handler(req, res) {
     return res
       .status(200)
       .send({ status: true, message: "Authorization Success" });
+  } else if (req.method === "PUT") {
+    const { username, password } = req.query;
+
+    if (!username || !password) {
+      return res
+        .status(200)
+        .send({ status: false, message: "username & password required" });
+    }
+
+    const isExist = await prisma.user.findFirst({
+      where: { username: username },
+    });
+
+    if (isExist) {
+      return res
+        .status(200)
+        .send({ status: false, message: "Username Already Exist" });
+    }
+
+    const salt = bcrypt.genSaltSync(10);
+    const hash = bcrypt.hashSync(password, salt);
+
+    await prisma.user.create({
+      data: { username, password: hash },
+    });
+
+    return res.status(200).send({ status: true, message: "Username Created" });
   } else if (req.method === "POST") {
     const { username, password } = req.body;
 

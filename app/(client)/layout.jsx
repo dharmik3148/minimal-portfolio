@@ -13,7 +13,7 @@ export default async function RootLayout({ children }) {
 
   let homepageData = null;
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/alldata`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/alldata`, {
       cache: "no-store",
     });
     homepageData = await res.json();
@@ -24,6 +24,7 @@ export default async function RootLayout({ children }) {
 
   return (
     <html lang="en">
+      <meta charSet="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
       <body

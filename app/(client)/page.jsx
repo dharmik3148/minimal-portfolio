@@ -19,7 +19,7 @@ export const metadata = {
 const Home = async () => {
   let data = null;
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/alldata`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/alldata`, {
       cache: "no-store",
     });
     data = await res.json();
@@ -31,7 +31,7 @@ const Home = async () => {
   return (
     <div className="pb-[50px]">
       <section className="mx-[15px] mt-[80px] mb-[20px] ">
-        <HeroSection data={data.homepage} />
+        {data?.homepage && <HeroSection data={data.homepage} />}
       </section>
       <section className="mx-[15px] mt-[40px] transform skew-y-[-3deg] origin-right">
         <ScrollVelocity

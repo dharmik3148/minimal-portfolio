@@ -9,10 +9,18 @@ export const getToken = async (adminUser) => {
 
 export async function deleteFile(relativeFilePath) {
   try {
-    if (relativeFilePath.startsWith("api/")) {
-      relativeFilePath = relativeFilePath.slice(4);
+    if (relativeFilePath.startsWith("api/uploads/")) {
+      relativeFilePath = relativeFilePath.slice("api/uploads/".length);
     }
-    const filePath = path.join(process.cwd(), relativeFilePath);
+
+    const filePath = path.join(process.cwd(), "uploads", relativeFilePath);
+
+    const stat = await fs.promises.stat(filePath);
+
+    if (stat.isDirectory()) {
+      console.warn("Tried to delete a directory, not a file:", filePath);
+      return false;
+    }
 
     await fs.promises.unlink(filePath);
     return true;

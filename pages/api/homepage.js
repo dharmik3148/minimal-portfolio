@@ -46,13 +46,13 @@ export default async function handler(req, res) {
       let resumePath = "";
 
       if (req.files?.imagepath?.[0]) {
-        imagePath = `uploads/${folder}/${req.files.imagepath[0].filename}`;
+        imagePath = `api/uploads/${folder}/${req.files.imagepath[0].filename}`;
       }
       if (req.files?.musicpath?.[0]) {
-        musicPath = `uploads/${folder}/${req.files.musicpath[0].filename}`;
+        musicPath = `api/uploads/${folder}/${req.files.musicpath[0].filename}`;
       }
       if (req.files?.resumepath?.[0]) {
-        resumePath = `uploads/${folder}/${req.files.resumepath[0].filename}`;
+        resumePath = `api/uploads/${folder}/${req.files.resumepath[0].filename}`;
       }
       const homepage = await prisma.homepage.findFirst();
 

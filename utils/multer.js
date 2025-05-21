@@ -13,7 +13,7 @@ const ensureDir = (dir) => {
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     const folder = req.query.folder;
-    const uploadPath = path.join("public", "uploads", folder);
+    const uploadPath = path.join("uploads", folder);
     ensureDir(uploadPath);
     cb(null, uploadPath);
   },

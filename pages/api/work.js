@@ -49,7 +49,7 @@ export default async function handler(req, res) {
 
       const imageEntries = req.files.map((file) => {
         const imageData = {
-          path: `uploads/${folder}/${file.filename}`,
+          path: `api/uploads/${folder}/${file.filename}`,
           projectId: parseInt(project.id),
         };
         return prisma.image.create({
@@ -120,7 +120,7 @@ export default async function handler(req, res) {
       if (req.files && req.files.length > 0) {
         const imageEntries = req.files.map((file) => {
           const imageData = {
-            path: `uploads/${folder}/${file.filename}`,
+            path: `api/uploads/${folder}/${file.filename}`,
             projectId: parseInt(id),
           };
           return prisma.image.create({

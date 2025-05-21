@@ -54,3 +54,18 @@ model Image {
   createdAt DateTime  @default(now())
   updatedAt DateTime  @default(now()) @updatedAt
 }
+
+
+server {
+        listen 80;
+        server_name 35.154.235.134;
+
+        location / {
+                proxy_pass http://127.0.0.1:3000;
+                proxy_http_version 1.1;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection 'upgrade';
+                proxy_set_header Host $host;
+                proxy_cache_bypass $http_upgrade;
+}
+}

@@ -17,9 +17,6 @@ const Navbar = ({ data }) => {
   const [isMuted, setIsMuted] = useState(true);
 
   const musicPath = data?.musicpath;
-  const musicUrl = musicPath
-    ? `/uploads/homepage/${musicPath.split("/").pop()}`
-    : null;
 
   const links = [
     { name: "Home", href: "/" },
@@ -43,10 +40,10 @@ const Navbar = ({ data }) => {
 
   return (
     <nav className="z-[2] text-[darkBlue] text-[20px] flex items-center justify-between fixed top-[15px] right-[15px] left-[15px] px-[15px] h-[50px]">
-      {musicUrl && (
+      {musicPath && (
         <div className="hidden">
           <ReactHowler
-            src={musicUrl}
+            src={musicPath}
             playing={playing}
             loop
             mute={isMuted}

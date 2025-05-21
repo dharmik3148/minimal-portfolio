@@ -1,3 +1,5 @@
+import React from "react";
+
 import AboutInfo from "@/components/clientComponents/AboutInfo";
 import Certifications from "@/components/clientComponents/Certifications";
 import ContactMe from "@/components/clientComponents/ContactMe";
@@ -6,8 +8,6 @@ import HeroSection from "@/components/clientComponents/HeroSection";
 import Projects from "@/components/clientComponents/Projects";
 import TechStack from "@/components/clientComponents/TechStack";
 import ScrollVelocity from "@/components/effects/ScrollVelocity";
-
-import React from "react";
 
 export const dynamic = "force-dynamic";
 
@@ -31,7 +31,7 @@ const Home = async () => {
   return (
     <div className="pb-[50px]">
       <section className="mx-[15px] mt-[80px] mb-[20px] ">
-        {data?.homepage && <HeroSection data={data.homepage} />}
+        {data.homepage && <HeroSection data={data.homepage} />}
       </section>
       <section className="mx-[15px] mt-[40px] transform skew-y-[-3deg] origin-right">
         <ScrollVelocity

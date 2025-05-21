@@ -46,7 +46,7 @@ export default async function handler(req, res) {
       let imagePath = null;
 
       if (req.files && req.files.length > 0) {
-        imagePath = `uploads/${folder}/${req.files[0].filename}`;
+        imagePath = `api/uploads/${folder}/${req.files[0].filename}`;
       }
 
       await prisma.experience.create({
@@ -93,7 +93,7 @@ export default async function handler(req, res) {
       let imagePath = undefined;
 
       if (req.files && req.files.length > 0) {
-        imagePath = `uploads/${folder}/${req.files[0].filename}`;
+        imagePath = `api/uploads/${folder}/${req.files[0].filename}`;
       }
 
       const lookExp = await prisma.experience.findUnique({

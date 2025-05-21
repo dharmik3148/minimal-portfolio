@@ -9,7 +9,10 @@ export const getToken = async (adminUser) => {
 
 export async function deleteFile(relativeFilePath) {
   try {
-    const filePath = path.join(process.cwd(), "public", relativeFilePath);
+    if (relativeFilePath.startsWith("api/")) {
+      relativeFilePath = relativeFilePath.slice(4);
+    }
+    const filePath = path.join(process.cwd(), relativeFilePath);
 
     await fs.promises.unlink(filePath);
     return true;
